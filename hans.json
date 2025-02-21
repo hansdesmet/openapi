@@ -1,0 +1,106 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "title" : "Rekenen",
+    "description" : "Berekeningen maken",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080",
+    "description" : "Generated server url"
+  } ],
+  "paths" : {
+    "/personen" : {
+      "post" : {
+        "tags" : [ "persoon-controller" ],
+        "operationId" : "post",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Persoon"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/kwadraat/getal" : {
+      "post" : {
+        "tags" : [ "kwadraat-controller" ],
+        "operationId" : "post_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "integer",
+                "format" : "int32"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/kwadraat/{getal}" : {
+      "get" : {
+        "tags" : [ "kwadraat-controller" ],
+        "summary" : "het kwadraat van een getal",
+        "operationId" : "kwadraat",
+        "parameters" : [ {
+          "name" : "getal",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "integer",
+                  "format" : "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Persoon" : {
+        "type" : "object",
+        "properties" : {
+          "naam" : {
+            "type" : "string",
+            "maxLength" : 20,
+            "minLength" : 0
+          },
+          "kinderen" : {
+            "type" : "integer",
+            "format" : "int32",
+            "minimum" : 0
+          }
+        },
+        "required" : [ "naam" ]
+      }
+    }
+  }
+}
